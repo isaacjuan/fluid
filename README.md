@@ -40,11 +40,24 @@ El `main` esta organizado por bloques numerados para recorrer conceptos en orden
 8. Recuperacion de fallback con `orElse`.
 9. Variante estatica con `StaticFluent<T>`.
 
-## Compilar y ejecutar
+## Compilar y ejecutar la app
 
 ```bash
-g++ -std=c++17 -Wall -Wextra -pedantic main.cpp -o fluid_demo
+g++ -std=c++17 -Wall -Wextra -pedantic \
+	main.cpp Demos.cpp BusinessRules.cpp Composable.cpp PersonaFluent.cpp \
+	-o fluid_demo
 ./fluid_demo
+```
+
+## Ejecutar pruebas unitarias de BusinessRules
+
+Las pruebas son independientes del pipeline fluido para validar reglas de negocio en aislamiento.
+
+```bash
+g++ -std=c++17 -Wall -Wextra -pedantic \
+	tests/BusinessRulesTests.cpp BusinessRules.cpp \
+	-o business_rules_tests
+./business_rules_tests
 ```
 
 ## Salida esperada (aprox.)

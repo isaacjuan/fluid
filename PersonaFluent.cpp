@@ -1,8 +1,7 @@
 #include "PersonaFluent.h"
 
-#include <iostream>
+#include <string>
 
-PersonaFluent& PersonaFluent::saludar() {
-    std::cout << "Hola, soy " << nombre << std::endl;
-    return *this;
+std::string PersonaFluent::saludo() const {
+    return "Hola, soy " + nombre;
 }
