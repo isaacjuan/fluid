@@ -8,6 +8,7 @@ SOURCES += \
         Composable.cpp \
         Demos.cpp \
         PersonaFluent.cpp \
+        UseCases.cpp \
         main.cpp
 
 HEADERS += \
@@ -17,4 +18,5 @@ HEADERS += \
         Fluent.h \
         PersonaBase.h \
         PersonaFluent.h \
-        StaticFluent.h
+        StaticFluent.h \
+        UseCases.h

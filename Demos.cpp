@@ -8,6 +8,7 @@
 #include "Fluent.h"
 #include "PersonaFluent.h"
 #include "StaticFluent.h"
+#include "UseCases.h"
 
 namespace {
 
@@ -145,6 +146,29 @@ void demoCrtpTemplatedDerived() {
               << std::endl;
 }
 
+void demoUseCaseAbstractionLevel() {
+    printDemoTitle("Demo UseCase (nivel mas abstracto)");
+
+    const auto casoA = UseCases::evaluarOperacion(7);
+    const auto casoB = UseCases::evaluarOperacion(12);
+
+    auto printEvaluacion = [](const char* etiqueta, const UseCases::EvaluacionOperacion& caso) {
+        std::cout << etiqueta << " -> normalizado: " << caso.scoreNormalizado
+                  << ", recuperado: " << caso.scoreRecuperado
+                  << ", final: " << caso.scoreFinal
+                  << ", estado: " << UseCases::toString(caso.estado)
+                  << ", aprobada: " << (caso.aprobada() ? "si" : "no")
+                  << ", politica: " << caso.versionPolitica << std::endl;
+
+        for (const auto& razon : caso.razones) {
+            std::cout << "  - " << razon << std::endl;
+        }
+    };
+
+    printEvaluacion("Caso A", casoA);
+    printEvaluacion("Caso B", casoB);
+}
+
 } // namespace
 
 void runAllDemos() {
@@ -158,4 +182,5 @@ void runAllDemos() {
     demoStaticFluent();
     demoCrtpFluentInheritance();
     demoCrtpTemplatedDerived();
+    demoUseCaseAbstractionLevel();
 }
