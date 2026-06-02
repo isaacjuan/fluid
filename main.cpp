@@ -45,14 +45,15 @@ public:
         return Fluent(v);
     }
 
-    // Método genérico para transformaciones
+    // map: transforma el valor y devuelve un nuevo Fluent
     template <typename F>
-    auto transform(F&& func) {
+    auto map(F&& func) {
         return Fluent(func(value));
     }
 
+    // flatMap: encadena funciones que ya retornan Fluent<...>
     template <typename F>
-    auto andThen(F&& func) {
+    auto flatMap(F&& func) {
         return func(value);
     }
 
@@ -90,21 +91,21 @@ int main() {
     Fluent<int> num(5);
 
     auto result = num.apply([](int& x) { x *= 2; })
-                      .transform([](int x) { return x + 3; })
-                      .transform([](int x) { return x * x; });
+                      .map([](int x) { return x + 3; })
+                      .map([](int x) { return x * x; });
 
     std::cout << result.get() << std::endl; // (5*2 + 3)^2 = 169
 
     auto factoryResult = Fluent<int>::from(5)
                              .apply([](int& x) { x *= 2; })
-                             .transform([](int x) { return x + 3; })
-                             .transform([](int x) { return x * x; });
+                             .map([](int x) { return x + 3; })
+                             .map([](int x) { return x * x; });
 
     std::cout << factoryResult.get() << std::endl; // 169
 
     auto chainedResult = Fluent<int>::from(5)
-                             .transform([](int x) { return x * 2; })
-                             .andThen([](int x) {
+                             .map([](int x) { return x * 2; })
+                             .flatMap([](int x) {
                                  return Fluent<std::string>::from("Result: " + std::to_string(x));
                              });
 
