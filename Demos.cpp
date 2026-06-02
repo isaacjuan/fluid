@@ -61,7 +61,7 @@ void demoFluentTapThen() {
     printDemoTitle("Demo Fluent tap + then");
 
     auto result = Fluent<int>::from(10)
-                      .tap([](const int& x) { std::cout << "tap: " << x << std::endl; })
+                      .also([](const int& x) { std::cout << "also: " << x << std::endl; })
                       .then(BusinessRules::incrementarUno)
                       .then([](int x) { return x + 4; });
 

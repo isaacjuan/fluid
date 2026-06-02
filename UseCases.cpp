@@ -24,16 +24,16 @@ EvaluacionOperacion evaluarOperacion(int scoreEntrada) {
     const bool superaFiltroInicial = BusinessRules::superaUmbral(scoreEntrada);
 
     const int scoreNormalizado = Fluent<int>::from(scoreEntrada)
-                                    .apply(BusinessRules::duplicarEnSitio)
-                                    .map(BusinessRules::sumarTres)
-                                    .map(BusinessRules::elevarAlCuadrado)
+                                                                        .let(BusinessRules::duplicarValor)
+                                                                        .let(BusinessRules::sumarTres)
+                                                                        .let(BusinessRules::elevarAlCuadrado)
                                     .get();
 
     const int scoreRecuperado = Fluent<int>::from(scoreEntrada)
-                                  .filter(BusinessRules::superaUmbral)
+                                                                    .takeIf(BusinessRules::superaUmbral)
                                   .mapIfPresent(BusinessRules::duplicarValor)
                                   .orElse(BusinessRules::fallbackConservador())
-                                  .map(BusinessRules::incrementarUno)
+                                                                    .let(BusinessRules::incrementarUno)
                                   .get();
 
     const int scoreFinal = (scoreNormalizado + scoreRecuperado) / 2;

@@ -36,6 +36,12 @@ public:
         return Fluent<OutputType>::from(func(value));
     }
 
+    // Alias estilo Kotlin: let(f) equivale a map(f).
+    template <typename F>
+    auto let(F&& func) {
+        return map(std::forward<F>(func));
+    }
+
     template <typename F>
     auto flatMap(F&& func) {
         return func(value);
@@ -49,10 +55,22 @@ public:
         return Fluent<std::optional<T>>::from(std::nullopt);
     }
 
+    // Alias estilo Kotlin: takeIf(pred) equivale a filter(pred).
+    template <typename P>
+    auto takeIf(P&& pred) {
+        return filter(std::forward<P>(pred));
+    }
+
     template <typename F>
     Fluent& tap(F&& func) {
         func(value);
         return *this;
+    }
+
+    // Alias estilo Kotlin: also(f) equivale a tap(f).
+    template <typename F>
+    Fluent& also(F&& func) {
+        return tap(std::forward<F>(func));
     }
 
     template <typename F>
