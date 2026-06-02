@@ -1,0 +1,11 @@
+# Qt Creator user-specific settings
+*.pro.user
+
+# Build outputs
+build/
+
+# CMake/Make generated files (optional safety)
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
