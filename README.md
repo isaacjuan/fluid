@@ -44,7 +44,7 @@ El `main` esta organizado por bloques numerados para recorrer conceptos en orden
 
 ```bash
 g++ -std=c++17 -Wall -Wextra -pedantic \
-	main.cpp Demos.cpp BusinessRules.cpp Composable.cpp PersonaFluent.cpp \
+	main.cpp Demos.cpp BusinessRules.cpp Composable.cpp PersonaFluent.cpp UseCases.cpp \
 	-o fluid_demo
 ./fluid_demo
 ```
@@ -67,7 +67,7 @@ Value: 15, Text: Hello World!
 169
 169
 Result: 10
-tap: 10
+also: 10
 15
 43
 24
@@ -75,6 +75,18 @@ tap: 10
 25
 100
 169
+Hola, soy Juan
+Nombre: Juan, Edad: 30
+Hola, soy Ana [empleada]
+Nombre: Ana, Edad: 28
+Hola, soy Luis [cliente]
+Nombre: Luis, Edad: 41
+Caso A -> normalizado: 289, recuperado: 100, final: 194, estado: APROBADA, aprobada: si, politica: v2.0-score-combinado
+	- El score de entrada no supera el umbral; se uso fallback
+	- Score final alto segun politica de aprobacion
+Caso B -> normalizado: 729, recuperado: 25, final: 377, estado: APROBADA, aprobada: si, politica: v2.0-score-combinado
+	- El score de entrada supera el umbral inicial
+	- Score final alto segun politica de aprobacion
 ```
 
 ## Ideas para extender

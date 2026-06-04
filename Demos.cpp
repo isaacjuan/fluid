@@ -59,6 +59,11 @@ void demoFluentFlatMap() {
 
 void demoFluentTapThen() {
     printDemoTitle("Demo Fluent tap + then");
+    int i= 4;
+    auto fresult =
+        Fluent<std::wstring>::from(L"getHandle failed for:")
+            .tap([&i](std::wstring& svalue) { svalue.append(std::to_wstring(i)); })
+                       .then([](const std::wstring& svalue) { std::cout << (svalue.c_str());return svalue; });
 
     auto result = Fluent<int>::from(10)
                       .also([](const int& x) { std::cout << "also: " << x << std::endl; })
